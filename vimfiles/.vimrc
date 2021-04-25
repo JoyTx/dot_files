@@ -35,97 +35,97 @@ Plug 'gruvbox-community/gruvbox'
 call plug#end()
 
 " Some basics:
-	set nocompatible
-	set autoindent
-	set autochdir
-	set hlsearch
-	set incsearch
-	set showmatch
-	filetype plugin on
-	syntax on
-	set encoding=utf-8
-	set number relativenumber
-	colorscheme gruvbox
-	set background=dark
-	"set showcmd
-	set nrformats+=alpha
-	nnoremap * *<C-O>:s///gn<CR>
-	vnoremap <leader>p "_dP
+    set nocompatible
+    set autoindent
+    set autochdir
+    set hlsearch
+    set incsearch
+    set showmatch
+    filetype plugin on
+    syntax on
+    set encoding=utf-8
+    set number relativenumber
+    colorscheme gruvbox
+    set background=dark
+    "set showcmd
+    set nrformats+=alpha
+    nnoremap * *<C-O>:s///gn<CR>
+    vnoremap <leader>p "_dP
 " Enable autocompletion:
-	set wildmode=longest,list,full
-	let g:acp_behaviorPerlOmniLength = 10
-	inoremap jk <ESC>
-	nnoremap <SPACE> /
+    set wildmode=longest,list,full
+    let g:acp_behaviorPerlOmniLength = 10
+    inoremap jk <ESC>
+    nnoremap <SPACE> /
 " Disables automatic commenting on newline:
-	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+    autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Goyo plugin makes text more readable when writing prose:
-	map <leader>f :Goyo \| set linebreak<CR>
+    map <leader>f :Goyo \| set linebreak<CR>
 
 " Spell-check set to <leader>o, 'o' for 'orthography':
-	map <leader>o :setlocal spell! spelllang=en_us<CR>
+    map <leader>o :setlocal spell! spelllang=en_us<CR>
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
-	set splitbelow
+    set splitbelow
 
 " Shortcutting split navigation, saving a keypress:
-	map <C-h> :wincmd h<CR>
-	map <C-j> :wincmd j<CR>
-	map <C-k> :wincmd k<CR>
-	map <C-l> :wincmd l<CR>
+    map <C-h> :wincmd h<CR>
+    map <C-j> :wincmd j<CR>
+    map <C-k> :wincmd k<CR>
+    map <C-l> :wincmd l<CR>
 
 " Check file in shellcheck:
-	map <leader>s :!clear && shellcheck %<CR>
+    map <leader>s :!clear && shellcheck %<CR>
 
 " Replace all is aliased to S.
-"	nnoremap S :%s//g<Left><Left>
+"    nnoremap S :%s//g<Left><Left>
 
 " Compile document, be it groff/LaTeX/markdown/etc.
-	map <leader>c :w! \| !compiler <c-r>%<CR><CR>
+    map <leader>c :w! \| !compiler <c-r>%<CR><CR>
 
 " Open corresponding .pdf/.html or preview
-	map <leader>p :!opout <c-r>%<CR><CR>
+    map <leader>p :!opout <c-r>%<CR><CR>
 
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
-	autocmd VimLeave *.tex !texclear %
+    autocmd VimLeave *.tex !texclear %
 
 " Ensure files are read as what I want:
-	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
-	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
-	autocmd BufRead,BufNewFile *.tex set filetype=tex
+    let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+    autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
+    autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
+    autocmd BufRead,BufNewFile *.tex set filetype=tex
 
 " Readmes autowrap text:
-	autocmd BufRead,BufNewFile *.md set tw=79
+    autocmd BufRead,BufNewFile *.md set tw=79
 
 " Use urlscan to choose and open a url:
-	:noremap <leader>u :w<Home> !urlscan -r 'linkhandler {}'<CR>
-	:noremap ,, !urlscan -r 'linkhandler {}'<CR>
+    :noremap <leader>u :w<Home> !urlscan -r 'linkhandler {}'<CR>
+    :noremap ,, !urlscan -r 'linkhandler {}'<CR>
 
 " Copy selected text to system clipboard (requires gvim/nvim/vim-x11 installed):
-	vnoremap <C-c> "+y
-	map <C-p> "+P
+    vnoremap <C-c> "+y
+    map <C-p> "+P
 
 " Enable Goyo by default for mutt writting
-	" Goyo's width will be the line limit in mutt.
-	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
-	autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
+    " Goyo's width will be the line limit in mutt.
+    autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
+    autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
 
 " Automatically deletes all trailing whitespace on save.
-	autocmd BufWritePre * %s/\s\+$//e
+    autocmd BufWritePre * %s/\s\+$//e
 
 " When shortcut files are updated, renew bash and ranger configs with new material:
-	autocmd BufWritePost ~/.bm* !shortcuts
+    autocmd BufWritePost ~/.bm* !shortcuts
 
 " Run xrdb whenever Xdefaults or Xresources are updated.
-	autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
+    autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
 
 " Highlight while searching only
-	augroup vimrc-incsearch-highlight
-	  autocmd!
-	  autocmd CmdlineEnter /,\? :set hlsearch
-	  autocmd CmdlineLeave /,\? :set nohlsearch
-	augroup END
+    augroup vimrc-incsearch-highlight
+      autocmd!
+      autocmd CmdlineEnter /,\? :set hlsearch
+      autocmd CmdlineLeave /,\? :set nohlsearch
+    augroup END
 
 "=====[ Configure % key (via matchit plugin) ]==============================
 
@@ -410,25 +410,25 @@ set breakindent
 "======[ vimfiler plugin settings]========
 let g:vimfiler_as_default_explorer = 1
 
-"	tabopen		Open the file in a new tab.
-"	choose		Open the file in a selected window.
-"	split		Open the file, splitting horizontally.
-"	vsplit		Open the file, splitting vertically.
-"	left		Open the file in the left, splitting vertically.
-"	right		Open the file in the right, splitting vertically.
-"	above		Open the file in the top, splitting horizontally.
-"	below		Open the file in the bottom, splitting horizontally.
-"	persist_open	Open the file in alternate window.  unite window
-"			isn't closed.
-"	tabsplit	Open the files and vsplit in a new tab.
-"	switch		Open the file in current window or jump to existing
-"			window/tabpage.
-"	tabswitch	Open the file in new tab or jump to existing
-"			window/tabpage.
-"	splitswitch	Open the file in split window or jump to existing
-"			window/tabpage.
-"	vsplitswitch	Open the file in vertical split window or jump to
-"			existing window/tabpage.
+"    tabopen        Open the file in a new tab.
+"    choose        Open the file in a selected window.
+"    split        Open the file, splitting horizontally.
+"    vsplit        Open the file, splitting vertically.
+"    left        Open the file in the left, splitting vertically.
+"    right        Open the file in the right, splitting vertically.
+"    above        Open the file in the top, splitting horizontally.
+"    below        Open the file in the bottom, splitting horizontally.
+"    persist_open    Open the file in alternate window.  unite window
+"            isn't closed.
+"    tabsplit    Open the files and vsplit in a new tab.
+"    switch        Open the file in current window or jump to existing
+"            window/tabpage.
+"    tabswitch    Open the file in new tab or jump to existing
+"            window/tabpage.
+"    splitswitch    Open the file in split window or jump to existing
+"            window/tabpage.
+"    vsplitswitch    Open the file in vertical split window or jump to
+"            existing window/tabpage.
 call vimfiler#custom#profile('default', 'context', {
       \ 'buffer_name' : 'explorer',
       \ 'winwidth' : 50,
@@ -510,3 +510,5 @@ if exists("+showtabline")
 endif
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline']}, <bang>0)
+" check unicode of the character under the cursor
+set statusline=%<%f%h%m%r%=%b\ 0x%B\ \ %l,%c%V\ %P
